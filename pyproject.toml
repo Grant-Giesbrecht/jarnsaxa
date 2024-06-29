@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jarnsaxa"
+version = "0.0.0.dev0"
+authors = [
+  { name="Grant Giesbrecht", email="grant.giesbrecht@colorado.edu" },
+]
+description = "Minimal python package containg common dependencies for my other projects."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Grant-Giesbrecht/jarnsaxa"
+Issues = "https://github.com/Grant-Giesbrecht/jarnsaxa/issues"
