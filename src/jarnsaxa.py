@@ -67,14 +67,6 @@ def ensureWhitespace(s:str, targets:str, whitespace_list:str=" \t", pad_char=" "
 	
 	return s
 
-def parseTwoIdx(input:str, delims:str):
-	p = 0
-	for k, g in groupby(input, lambda x:x in delims):
-		q = p + sum(1 for i in g)
-		if not k:
-			yield (p, q) # or p, q-1 if you are really sure you want that
-		p = q
-
 class StringIdx():
 	def __init__(self, val:str, idx:int, idx_end:int=-1):
 		self.str = val
@@ -87,8 +79,16 @@ class StringIdx():
 	def __repr__(self):
 		return self.__str__()
 
-def parseIdx(input:str, delims:str=" ", keep_delims:str=""):
+def parse_idx(input:str, delims:str=" ", keep_delims:str=""):
 	""" Parses a string, breaking it up into an array of words. Separates at delims. """
+	
+	def parseTwoIdx(input:str, delims:str):
+		p = 0
+		for k, g in groupby(input, lambda x:x in delims):
+			q = p + sum(1 for i in g)
+			if not k:
+				yield (p, q) # or p, q-1 if you are really sure you want that
+			p = q
 	
 	out = []
 	
