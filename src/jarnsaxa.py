@@ -82,7 +82,7 @@ class StringIdx():
 def parse_idx(input:str, delims:str=" ", keep_delims:str=""):
 	""" Parses a string, breaking it up into an array of words. Separates at delims. """
 	
-	def parseTwoIdx(input:str, delims:str):
+	def parse_two_idx(input:str, delims:str):
 		p = 0
 		for k, g in groupby(input, lambda x:x in delims):
 			q = p + sum(1 for i in g)
@@ -92,7 +92,7 @@ def parse_idx(input:str, delims:str=" ", keep_delims:str=""):
 	
 	out = []
 	
-	sections = list(parseTwoIdx(input, delims))
+	sections = list(parse_two_idx(input, delims))
 	for s in sections:
 		out.append(StringIdx(input[s[0]:s[1]], s[0], s[1]))
 	return out
