@@ -67,6 +67,24 @@ def ensureWhitespace(s:str, targets:str, whitespace_list:str=" \t", pad_char=" "
 	
 	return s
 
+def barstr(text:str, width:int=80, bc:str='*', pad:bool=True):
+
+		s = text;
+
+		# Pad input if requested
+		if pad:
+			s = " " + s + " ";
+
+		pad_back = False;
+		while len(s) < width:
+			if pad_back:
+				s = s + bc
+			else:
+				s = bc + s
+			pad_back = not pad_back
+
+		return s
+
 class StringIdx():
 	def __init__(self, val:str, idx:int, idx_end:int=-1):
 		self.str = val
