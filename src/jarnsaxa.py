@@ -200,7 +200,7 @@ def dict_to_hdf(root_data:dict, save_file:str, use_json_backup:bool=False, show_
 		
 		return True
 
-def hdf_to_dict(filename, to_lists:bool=True) -> dict:
+def hdf_to_dict(filename, to_lists:bool=True, decode_strs:bool=True) -> dict:
 	''' Reads a HDF file and converts the data to a dictionary '''
 	
 	def read_level(fh:h5py.File) -> dict:
@@ -219,11 +219,21 @@ def hdf_to_dict(filename, to_lists:bool=True) -> dict:
 				
 				# Converting to a pandas DataFrame will crash with
 				# some numpy arrays, so convert to a list.
+				is_list_type = False
 				if type(out_data[k]) == np.ndarray and to_lists:
 						out_data[k] = list(out_data[k])
+						is_list_type = True
 				elif type(out_data[k]) == list and not to_lists:
 						out_data[k] = np.array(out_data[k])
-						
+						is_list_type = True
+				
+				if is_list_type and len(out_data[k]) > 0 and type(out_data[k][0]) == bytes:
+					for idx, val in enumerate(out_data[k]):
+						out_data[k][idx] = val.decode()
+				else:
+					if decode_strs and type(out_data[k]) == bytes:
+						out_data[k] = out_data[k].decode()
+				
 		return out_data
 	
 	# Open file
