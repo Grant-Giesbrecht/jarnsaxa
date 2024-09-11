@@ -174,11 +174,10 @@ def dict_to_hdf(root_data:dict, save_file:str, use_json_backup:bool=False, show_
 		except Exception as e:
 			hdf_successful = False
 			exception_str = f"{e}"
-			print(root_data)
 	
 	# Check success condition
 	if hdf_successful:
-		print(f"Wrote file in {time.time()-t0} sec.")
+		# print(f"Wrote file in {time.time()-t0} sec.")
 		
 		return True
 	else:
