@@ -126,6 +126,14 @@ def dict_to_hdf(root_data:dict, save_file:str, use_json_backup:bool=False, show_
 	* If the value of the key is anything other than a dictionary, it assumes
 	  it can be saved to HDF (such as a list of floats), and saves it as a dataset (variable).
 	
+	Args:
+		root_data (dict): Dictionary to save to file.
+		save_file (str): Filename to write to.
+		use_json_backup (bool): Optional parameter to save a copy of the file as a JSON dict. Default = False.
+		show_detail (bool): Optional parameter to show detail while saving. Default = False.
+	
+	Returns:
+		bool: True if successfully saved.
 	'''
 	
 	def write_level(fh:h5py.File, level_data:dict, show_detail:bool=False):
