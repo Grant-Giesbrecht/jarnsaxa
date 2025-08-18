@@ -6,7 +6,7 @@ import time
 import json
 import numpy as np
 from abc import ABC, abstractmethod
-import pylogfile as plf
+import pylogfile.base as plf
 from colorama import Fore, Style
 import copy
 
