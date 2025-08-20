@@ -29,7 +29,7 @@ class Packable(ABC):
 	def __init__(self, log:plf.LogPile=None):
 		
 		if log is None:
-			print(f"{Fore.RED}Log object was not initialized in {type(self)} instance.!{Style.RESET_ALL}")
+			# print(f"{Fore.RED}Log object was not initialized in {type(self)} instance.!{Style.RESET_ALL}")
 			self.log = plf.LogPile(use_mutex=False)
 		else:
 			self.log = log
