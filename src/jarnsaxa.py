@@ -291,7 +291,7 @@ class Serializable:
 			# Registered classes
 			if t and t in SERIALIZABLE_CLASS_REGISTRY:
 				info = SERIALIZABLE_CLASS_REGISTRY[t]
-				payload = Serializable.deserialize(obj["data"])  # decode inner payload first
+				payload = Serializable.deserialize(obj["state_data"])  # decode inner payload first
 				from_version = int(obj.get("v", 1))
 				to_version = info.version
 				if from_version != to_version:
