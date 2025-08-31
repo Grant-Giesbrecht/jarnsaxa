@@ -230,8 +230,8 @@ class Serializable:
 			payload = info.to(obj)
 			return {
 				"__type__": type(obj).__name__,
-				"v": info.version,     # per-class schema version
-				"data": Serializable.serialize(payload),
+				"cls_serializer_version": info.version,     # per-class schema version
+				"state_data": Serializable.serialize(payload),
 			}
 		
 		# datetime
