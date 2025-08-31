@@ -105,6 +105,8 @@ class Serializable:
 		  data.
 		- Populate __state_fields__ with the names of every variable you want saved
 		  or loaded to/from the serialized versions.
+		- Classes that inherit from eachother will merge their __state_fields__, unless
+		  you set __extend_state_fields__ to False.
 	
 	'''
 	
@@ -193,6 +195,16 @@ class Serializable:
 			return
 		if not hasattr(cls, "__state_fields__"):
 			raise AttributeError(f"{cls.__name__} must define __state_fields__")
+		
+		# Merge parent's fields if subclass sets __extend_state_fields__ = True
+		if getattr(cls, "__extend_state_fields__", True):
+			base_fields = ()
+			for base in cls.__mro__[1:]:
+				if hasattr(base, "__state_fields__"):
+					base_fields = getattr(base, "__state_fields__", ())
+					break
+			cls.__state_fields__ = base_fields + tuple(cls.__state_fields__)
+		
 		cls._register_json_class()
 	
 	@staticmethod
